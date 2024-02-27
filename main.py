@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'We have logged in as {bot.user}')
+    print(f'Ho fatto l\'accesso come {bot.user}')
 
 def get_duck_image_url():
     url = 'https://random-d.uk/api/random'
@@ -20,16 +20,16 @@ def get_duck_image_url():
     return data['url']
 
 
-@bot.command('duck')
-async def duck(ctx):
-    '''The duck command returns the photo of the duck'''
-    print('hello')
+@bot.command('papera')
+async def papera(ctx):
+    '''Il comando restitutisce la foto di una papera'''
+    print('ciao')
     image_url = get_duck_image_url()
     await ctx.send(image_url)
 
 
 @bot.command()
-async def check(ctx):
+async def controlla(ctx):
     if ctx.message.attachments:
         for attachment in ctx.message.attachments:
             file_name = attachment.filename
@@ -37,7 +37,7 @@ async def check(ctx):
             await attachment.save(f"./{attachment.filename}")
             await ctx.send(get_class(model_path="./keras_model.h5", labels_path="labels.txt", image_path=f"./{attachment.filename}"))
     else:
-        await ctx.send("You forgot to upload the image :(")
+        await ctx.send("Hai dimenticato di caricare l'immagine :(")
 
 
 bot.run('TOKEN')
